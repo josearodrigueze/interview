@@ -8,16 +8,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductTest {
-    private Product product;
 
     @Test
     void print() {
         // SUT
-        product = new Product("name", 10.0, 10);
+        final Product product = new Product("name", 10, 10);
 
         //asserts
-        assertThat(product.toString(), is("name, 10, 10.0"));
+        assertThat(product.toString(), is("name, 10, 10"));
     }
-
 
 }
