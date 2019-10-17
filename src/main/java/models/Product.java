@@ -3,22 +3,14 @@ package models;
 import java.util.Objects;
 
 public class Product {
-    private String name;
-    private Integer price;
-    private Integer sellIn;
-    private Rule rule;
+    protected String name;
+    protected Integer price;
+    protected Integer sellIn;
 
     public Product(String name, Integer price, Integer sellIn) {
         this.name = name;
         this.price = price;
         this.sellIn = sellIn;
-    }
-
-    public Product(String name, Integer price, Integer sellIn, Rule rule) {
-        this.name = name;
-        this.price = price;
-        this.sellIn = sellIn;
-        this.rule = rule;
     }
 
     public String getName() {
@@ -45,10 +37,6 @@ public class Product {
         this.sellIn = sellIn;
     }
 
-    public Rule getRule() {
-        return rule;
-    }
-
     @Override
     public String toString() {
         return name + ", " + sellIn + ", " + price;
@@ -66,7 +54,17 @@ public class Product {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(name, price, sellIn);
+    }
+
+    public Product updatePrice() {
+        sellIn--;
+        price--;
+
+        if (sellIn < 0) {
+            price--;
+        }
+
+        return this;
     }
 }

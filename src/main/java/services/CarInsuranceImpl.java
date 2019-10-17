@@ -1,6 +1,7 @@
 package services;
 
 import models.Product;
+import models.Rule;
 
 import java.util.List;
 import java.util.function.Function;
@@ -22,7 +23,7 @@ public class CarInsuranceImpl extends CarInsurance {
         return this.getProducts();
     }
 
-    private Function<Product, Product> applyRule() {
+    Function<Product, Product> applyRule() {
         return prod -> {
 
             Integer sellIn = prod.getSellIn();
@@ -31,7 +32,15 @@ public class CarInsuranceImpl extends CarInsurance {
             prod.setSellIn(sellIn);
 
             Integer price = prod.getPrice();
-            price--;
+            if("Full Coverage".equalsIgnoreCase(prod.getName())){
+                price++;
+            } else{
+                price--;
+
+                if (sellIn < 0) {
+                    price--;
+                }
+            }
 
             prod.setPrice(price);
             return prod;
